@@ -15,12 +15,21 @@
 
 用于 Claude Code 中转站 Any Router 网站多账号每日签到，一次 $25，限时注册即送 100 美金，[点击这里注册](https://anyrouter.top/register?aff=gSsN)。业界良心，支持 Claude Sonnet 4.5、GPT-5-Codex、Claude Code 百万上下文（使用 `/model sonnet[1m]` 开启），`gemini-2.5-pro` 模型。
 
+## 账号额度概览
+
+> 由签到 Action 自动维护，展示每个账号的剩余额度与总剩余。
+
+<!-- BALANCE_START -->
+> 签到运行后将自动更新各账号剩余额度与总剩余。
+<!-- BALANCE_END -->
+
 ## 功能特性
 
 - ✅ 多平台（兼容 NewAPI 与 OneAPI）
 - ✅ 单个/多账号自动签到
 - ✅ 多种机器人通知（可选）
 - ✅ 绕过 WAF 限制
+- ✅ README 自动更新账号额度（剩余 / 总剩余）
 
 ## 使用方法
 
@@ -123,6 +132,15 @@
 
 - 脚本每 6 小时执行一次（1. action 无法准确触发，基本延时 1~1.5h；2. 目前观测到 anyrouter 的签到是每 24h 而不是零点就可签到）
 - 你也可以随时手动触发签到
+
+## 账号额度自动更新
+
+每次签到运行后，脚本会把各账号的剩余额度、已用额度以及总剩余写入 README 顶部的「账号额度概览」区块（位于 `<!-- BALANCE_START -->` 与 `<!-- BALANCE_END -->` 标记之间），并由 workflow 自动提交回仓库。
+
+- **仅在数据变化时提交**：只有当额度数值发生变化时才会写文件并提交，时间戳不会单独触发提交，避免无意义的提交记录
+- **需要写入权限**：workflow 已声明 `permissions: contents: write`。若提交失败，请到仓库 `Settings -> Actions -> General -> Workflow permissions` 勾选 `Read and write permissions`
+- **隐私提示**：如果仓库是公开的，额度数据会公开可见。若不想公开，可将仓库设为私有，或删除 README 中的 `账号额度概览` 区块与标记即可停用该功能
+- **本地运行**：本地执行 `checkin.py` 也会更新本地 README；如不希望本地改动，可设置环境变量 `CHECKIN_UPDATE_README=false` 跳过
 
 ## 注意事项
 

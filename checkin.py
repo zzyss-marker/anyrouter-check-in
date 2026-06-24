@@ -37,6 +37,7 @@ from utils.config import AccountConfig, AppConfig, load_accounts_config
 from utils.debug import debug_print, is_debug_enabled
 from utils.notify import notify
 from utils.proxy import get_playwright_proxy, get_proxy_server
+from utils.readme import update_readme_balances
 
 load_dotenv()
 
@@ -473,6 +474,34 @@ def run_check_in_requests(
 		return False, None, None
 
 
+def update_readme_overview(accounts: list[AccountConfig], current_balances: dict) -> None:
+	"""将各账号的剩余额度与总剩余写入 README 的额度概览区块"""
+	if os.getenv('CHECKIN_UPDATE_README', 'true').strip().lower() == 'false':
+		print('[INFO] CHECKIN_UPDATE_README=false, skip README balance update')
+		return
+
+	readme_balances = []
+	for i, account in enumerate(accounts):
+		balance = current_balances.get(f'account_{i + 1}')
+		if balance:
+			readme_balances.append(
+				{
+					'name': account.get_display_name(i),
+					'provider': account.provider,
+					'quota': balance['quota'],
+					'used': balance['used'],
+				}
+			)
+
+	if not readme_balances:
+		return
+
+	try:
+		update_readme_balances(readme_balances)
+	except Exception as e:
+		print(f'[WARN] Failed to update README balances: {e}')
+
+
 async def main():
 	"""主函数"""
 	if is_debug_enabled():
@@ -599,6 +628,8 @@ async def main():
 
 	if current_balance_hash:
 		save_balance_hash(current_balance_hash)
+
+	update_readme_overview(accounts, current_balances)
 
 	if need_notify and notification_content:
 		summary = [
