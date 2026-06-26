@@ -20,16 +20,16 @@
 > 由签到 Action 自动维护，展示每个账号的剩余额度与总剩余。
 
 <!-- BALANCE_START -->
-> 最后更新：2026-06-26 03:58:20 (UTC+8)
+> 最后更新：2026-06-26 11:32:49 (UTC+8)
 
 | 账号 | 服务商 | 剩余额度 | 已用额度 |
 | :-- | :-- | --: | --: |
-| Account 1 | anyrouter | $339.12 | $4485.88 |
-| Account 2 | anyrouter | $2132.30 | $1167.70 |
-| Account 3 | anyrouter | $616.81 | $2630.65 |
-| Account 4 | anyrouter | $442.62 | $7.38 |
-| Account 5 | anyrouter | $1664.62 | $35.38 |
-| **总计** | — | **$5195.47** | **$8326.99** |
+| Account 1 | anyrouter | $364.12 | $4485.88 |
+| Account 2 | anyrouter | $2157.30 | $1167.70 |
+| Account 3 | anyrouter | $641.81 | $2630.65 |
+| Account 4 | anyrouter | $467.62 | $7.38 |
+| Account 5 | anyrouter | $1689.62 | $35.38 |
+| **总计** | — | **$5320.47** | **$8326.99** |
 <!-- BALANCE_END -->
 
 ## 功能特性
